@@ -17,15 +17,15 @@ DSTFILE = os.path.join(cfg.DATADIR, 'new_file.txt')
 # ----------------------------------------------------------------------------
 # This will open the file located at `SRCFILE` and return a handler (file
 # object):
-fobj = open(SRCFILE,mode='r')
+fobj  = open(SRCFILE, mode='r')
 
 # We can get the entire content of the file by calling the method `.read()`,
 # without parameters:
-cnts = fobj.read()
+cnts  = fobj.read()
 
 # The variable `cnts` will be a string containing the full contents of the
 # file. This will print the first 20 characters:
-print(cnts[:20])
+print(cnts[:35])
 
 
 # Check if the file is closed
@@ -41,8 +41,8 @@ print(fobj.closed)
 # Remember that we previously closed the file so we need to open it again
 fobj = open(SRCFILE, mode='r')
 # Contents using `.read`
-#cnts = fobj.read()
 cnts = fobj.read()
+#cnts = ''
 print(f"First 20 characters in cnts: '{cnts[:20]}'")
 
 # Start with an empty string
@@ -66,7 +66,7 @@ fobj = open(SRCFILE, mode='r')
 
 # Read the first line
 first_line = next(fobj)
-print(first_line)
+
 # After that, the fobj iterator now points to the second line in the file
 
 for line in fobj:
@@ -183,57 +183,3 @@ with open(DSTFILE, mode='w') as fobj:
 
 print_lines_rstrip(DSTFILE)
 
-
-
-def print_lines_rstrip(pth):
-    """ Function to print the lines of a file
-    Parameters
-    ----------
-    pth : str
-        Location of the file
-    Notes
-    -----
-    Each line in the file will be printed as
-        line number: 'string with the line text'
-    """
-    with open(pth) as fobj:
-        for i, line in enumerate(fobj):
-            print(f"line {i}: '{line.rstrip()}'")
-
-
-with open(DSTFILE, mode='w') as fobj:
-   fobj.write('This is a line\n')
-   fobj.write('This is a another line')
-
-
-
-
-
-def freqword(filepath):
-    with open(filepath) as file:
-        # Count word frequency
-        counts = dict()
-        for line in file:
-            words = line.split()
-            for word in words:
-                counts[word] = counts.get(word, 0) + 1
-
-        # Find the most frequent word
-        maxcount = None
-        maxword = None
-        for word, count in counts.items():
-            if maxcount is None or count > maxcount:
-                maxword = word
-                maxcount = count
-
-        # Return the result
-        return f"The most frequent word is: {maxword}, and the number of times it appeared is: {maxcount}"
-
-# Call the function
-import os
-from toolkit_config import WEEK5DIR
-file_name = 'iso.txt'
-file_path = os.path.join(WEEK5DIR, file_name)
-
-result = freqword(file_path)
-print(result)
